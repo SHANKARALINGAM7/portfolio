@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shankaralingam S - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        /* Root Colors */
+        :root {
+            --primary-color: #2a2a72;
+            --secondary-color: #009ffd;
+            --accent-color: #00ff87;
+            --dark-bg: #1a1a2e;
+        }
+
+        /* Basic Styling */
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: rgba(26, 26, 46, 0.95);
+            padding: 2rem;
+            z-index: 100;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-section {
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 6px solid var(--accent-color);
+            margin-bottom: 1rem;
+            transition: transform 1s;
+        }
+
+        .profile-img:hover {
+            transform: rotateY(180deg);
+        }
+
+        .profile-section h4, .profile-section p {
+            color: white;
+            margin: 0;
+        }
+
+        .profile-section p {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+
+        .nav-links {
+            margin-top: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            margin: 0.5rem 0;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--secondary-color);
+            box-shadow: 0 0 20px rgba(0,159,253,0.5);
+        }
+
+        /* Content container */
+        .content-container {
+            margin-left: 320px;
+            padding: 2rem;
+            text-align: center;
+            color: rgb(249, 244, 244);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            display: none;
+            padding: 2rem;
+            width: 90%;
+            max-width: 900px;
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+            animation: fadeIn 0.6s ease-in-out forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+    </style>
+<body>
+    <div id="canvas-container"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="profile-section">
+            <img src="shan.jpg" alt="Profile" class="profile-img">
+            <h4>Shankaralingam S</h4>
+            <p>B.Tech Information Technology</p>
+            <div class="social-icons">
+                <a href="https://github.com/SHANKARALINGAM7" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/shankaralingam-s-4100ba26a" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://leetcode.com/u/SHANKARALINGAM-S/" target="_blank"><i class="fab fa-leetcode"></i></a>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a class="nav-link active" data-page="about">About</a>
+            <a class="nav-link" data-page="projects">Projects</a>
+            <a class="nav-link" data-page="skills">Skills</a>
+            <a class="nav-link" data-page="certifications">Certifications</a>
+            <a class="nav-link" data-page="achievements">Achievements</a>
+            <a class="nav-link" data-page="education">Education</a>
+        </div>
+    </nav>
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- About Page -->
+        <div class="page active" id="about">
+            <div class="section-card">
+                <h2>Welcome to My Portfolio!</h2>
+                <p>I'm Shankaralingam, a passionate B.Tech student in Information Technology with a focus on full-stack development.</p>
+                <p>With a strong foundation in programming and software engineering, I specialize in technologies like <strong>Spring Boot</strong>, <strong>React</strong>, <strong>MySQL</strong>, and <strong>JavaScript</strong>. I have developed numerous projects aimed at solving real-world problems and enhancing user experiences.</p>
+                <p>I'm committed to continuous learning and improvement, always seeking to expand my skill set and stay updated with the latest trends in technology.</p>
+            </div>
+        </div>
+
+        <!-- Projects Page -->
+        <div class="page" id="projects">
+            <div class="project-card">
+                <h3>College Event Posting Portal</h3>
+                <p>A platform for colleges to post events, improving accessibility and engagement with secure authentication. <strong>Tech Stack:</strong> Spring Boot, MySQL, React.</p>
+            </div>
+            <div class="project-card">
+                <h3>Quiz Portal Application</h3>
+                <p>A full-stack quiz application with real-time results and user sessions. <strong>Tech Stack:</strong> Spring Boot, MySQL, React.</p>
+            </div>
+            <div class="project-card">
+                <h3>Card Game</h3>
+                <p>An interactive game with randomized gameplay and hidden elements for a fun experience. <strong>Tech Stack:</strong> HTML, CSS, JavaScript, Bootstrap.</p>
+            </div>
+        </div>
+
+        <!-- Skills Page with Bar Chart -->
+        <div class="page" id="skills">
+            <div class="section-card">
+                <h2>Technical Skills</h2>
+                <div class="chart-container">
+                    <canvas id="skillsBarChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certifications Page -->
+        <div class="page" id="certifications">
+            <div class="section-card">
+                <h2>Certifications</h2>
+                <ul>
+                    <li>AWS Foundations: ML Basics - Simplilearn</li>
+                    <li>Java Collection Framework - Scaler</li>
+                    <li>Python Course - Kaggle</li>
+                    <li>Introduction to MongoDB - Academic Leaders Connect</li>
+                </ul>
+            </div>
+        </div>
+
+     <!-- Achievements Page -->
+<div class="page" id="achievements">
+    <div class="section-card">
+        <h2>Achievements</h2>
+        <ul>
+            <!-- Technical Achievements -->
+            <li>Participated in TCS CodeVita coding contest.</li>
+            <li>Participated in a 24-hour Hackathon conducted by Karpagam College of Engineering.</li>
+            <li>Actively practicing Data Structures and Algorithms; solved 500+ problems on LeetCode and 850+ problems on SkillRack.</li>
+            
+            <!-- Sports Achievements -->
+            <li>Participated in Carrom Tournament at Karpagam College of Engineering.</li>
+            <li>Won the Championship in the Hostel Day cricket match at Karpagam College of Engineering.</li>
+        </ul>
+    </div>
+</div>
+
+
+       <!-- Education Page -->
+<div class="page" id="education">
+    <div class="section-card">
+        <h2>Education</h2>
+        <h4>B.Tech in Information Technology (2022 - 2026)</h4>
+        <p>Karpagam College of Engineering, Coimbatore</p>
+        <ul>
+            <li>Current CGPA: 8.51</li>
+            <li>Completed 4 semesters, currently in 5th semester</li>
+        </ul>
+        <h4>HSC (2022)</h4>
+        <p>Sri Shanmuka Matriculation Hr. Sec. School, Mannargudi</p>
+        <ul>
+            <li>Scored 92%</li>
+        </ul>
+        <h4>SSLC (2020)</h4>
+        <p>Sri Shanmuka Matriculation Hr. Sec. School, Mannargudi</p>
+    </div>
+</div>
+
+
+<script>
+    // Galaxy Background Animation
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+    // Create stars in the galaxy
+    const starsGeometry = new THREE.BufferGeometry();
+    const starCount = 5000;
+    const starPositions = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount * 3; i++) {
+        starPositions[i] = (Math.random() - 0.5) * 1000;
+    }
+    starsGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+
+    const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.5 });
+    const stars = new THREE.Points(starsGeometry, starsMaterial);
+    scene.add(stars);
+
+    camera.position.z = 5;
+
+    // Rotate galaxy stars for a lively effect
+    function animateGalaxy() {
+        requestAnimationFrame(animateGalaxy);
+        stars.rotation.x += 0.0003;
+        stars.rotation.y += 0.0005;
+        stars.rotation.z += 0.0004; // Slight z-axis rotation
+        renderer.render(scene, camera);
+    }
+    animateGalaxy();
+
+    // Page Navigation
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function () {
+            // Remove 'active' class from all links
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            // Add 'active' class to clicked link
+            this.classList.add('active');
+
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            // Show the selected page
+            const targetPage = this.getAttribute('data-page');
+            document.getElementById(targetPage).classList.add('active');
+        });
+    });
+
+    // Skills Chart
+    const ctx = document.getElementById('skillsBarChart').getContext('2d');
+    const skillsBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['JavaScript', 'Spring Boot', 'React', 'MySQL', 'Java'],
+            datasets: [{
+                label: 'Skill Level',
+                data: [85, 80, 75, 70, 85],
+                backgroundColor: 'rgba(0, 159, 253, 0.8)',
+                borderColor: 'rgba(0, 159, 253, 1)',
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+</script>
